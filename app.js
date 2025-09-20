@@ -18,23 +18,29 @@ const GameBoard = (function () {
     // A terminal function to tell if the game is ended on this board
     // RETURN which side has won, or tie.
     function getGameStatus() {
+        function checkHorizontalWins(row) {
+            return gameBoard[row][0] === gameBoard[row][1] && gameBoard[row][1] === gameBoard[row][2];
+        }
+        
+        function checkVerticalWins(col) {
+            return gameBoard[0][col] === gameBoard[1][col] && gameBoard[1][col] === gameBoard[2][col];
+        }
+
         for (let i = 0; i < gameBoard.length; i++) {
             for (let j = 0; j < gameBoard.length; j++) {
-                // win condition as a horizontal line (row)
+                // if this is not an empty space, check to see any winning condition
                 if (!isEmptySpace(i, j)) {
-                    if (isValidIndex(i, j + 1) && isValidIndex(i, j + 2)) {
-                        console.log(i, j);
-                        console.log(i, j + 1);
-                        console.log(i, j + 2);
-                        console.log(gameBoard[i][j] === gameBoard[i][j + 1] === gameBoard[i][j + 2]);
-                        if (gameBoard[i][j] === gameBoard[i][j + 1] && gameBoard[i][j + 1] === gameBoard[i][j + 2]) {
-                            console.log(`player has won!`);
-                            return gameBoard[i][j]; // return the won side
-                        }
+                    if (checkHorizontalWins(i)) {
+                        console.log(`player has won horizontally!`);
+                        return gameBoard[i][j]; // return the won side
+                    }
+ 
+                    if (checkVerticalWins(j)) {
+                        console.log(`${gameBoard[i][j]} has won vertically!`);
+                        return gameBoard[i][j];
                     }
                 }
             }
-            
             // return something to indicate the game should continue
         }
     }
