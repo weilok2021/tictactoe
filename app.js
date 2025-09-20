@@ -34,6 +34,8 @@ const GameBoard = (function () {
                     }
                 }
             }
+            
+            // return something to indicate the game should continue
         }
     }
 
