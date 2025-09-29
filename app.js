@@ -106,4 +106,12 @@ const createPlayer = function () {
     return { increment, setSide, getSide };
 }
 
-module.exports = { GameBoard };
+const DisplayController = function() {
+    const board = GameBoard.getBoard();
+}
+
+const td = document.querySelector("td");
+console.log(td.dataset.col);
+console.log(td.dataset.row);
+
+
