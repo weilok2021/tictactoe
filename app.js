@@ -37,13 +37,21 @@ const GameBoard = (function () {
                 return gameBoard[0][i];
             }
         }
+
+        for (let i = 0; i < gameBoard.length; i++) {
+            for (let j = 0; j < gameBoard.length; j++) {
+                if (isEmptySpace(i, j))
+                    return "In Progress";
+            }
+        }
+        return "Draw";
     }
 
-    function initializeBoardState(row, col) {
+    function initializeBoardState() {
         gameBoard = [];
-        for (let i = 0; i < row; i++) {
+        for (let i = 0; i < 3; i++) {
             gameBoard[i] = [];
-            for (let j = 0; j < col; j++) {
+            for (let j = 0; j < 3; j++) {
                 gameBoard[i][j] = '';
             }
         }
@@ -69,10 +77,15 @@ const GameBoard = (function () {
 
         if (isValidMove(row, col)) {
             gameBoard[row][col] = side
+            return true;
         }
+        return false;
     }
 
-    return { move, initializeBoardState, displayBoardState, getGameStatus };
+    function getBoard() {
+        return gameBoard;
+    }
+    return { move, initializeBoardState, displayBoardState, getGameStatus, getBoard };
 })()
 
 const createPlayer = function () {
