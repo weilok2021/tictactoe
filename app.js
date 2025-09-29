@@ -7,7 +7,7 @@ const GameBoard = (function () {
     let gameBoard = [];
 
     function isValidIndex(row, col) {
-        const isValid = (row >= 0 && row < gameBoard.length) && (col >= 0 && col < gameBoard.length)
+        const isValid = (row >= 0 && row < gameBoard.length) && (col >= 0 && col < gameBoard.length);
         return isValid;
     }
 
@@ -18,30 +18,17 @@ const GameBoard = (function () {
     // A terminal function to tell if the game is ended on this board
     // RETURN which side has won, or tie.
     function getGameStatus() {
-        function checkHorizontalWins(row) {
-            return gameBoard[row][0] === gameBoard[row][1] && gameBoard[row][1] === gameBoard[row][2];
-        }
-        
-        function checkVerticalWins(col) {
-            return gameBoard[0][col] === gameBoard[1][col] && gameBoard[1][col] === gameBoard[2][col];
-        }
-
         for (let i = 0; i < gameBoard.length; i++) {
-            for (let j = 0; j < gameBoard.length; j++) {
-                // if this is not an empty space, check to see any winning condition
-                if (!isEmptySpace(i, j)) {
-                    if (checkHorizontalWins(i)) {
-                        console.log(`player has won horizontally!`);
-                        return gameBoard[i][j]; // return the won side
-                    }
- 
-                    if (checkVerticalWins(j)) {
-                        console.log(`${gameBoard[i][j]} has won vertically!`);
-                        return gameBoard[i][j];
-                    }
-                }
-            }
-            // return something to indicate the game should continue
+            // return gameBoard[row][0] === gameBoard[row][1] && gameBoard[row][1] === gameBoard[row][2];
+            // return gameBoard[0][col] === gameBoard[1][col] && gameBoard[1][col] === gameBoard[2][col];
+            // if (isValidIndex(row + 1, col + 1) && isValidIndex(row + 2, col + 2)) {
+            //     return (gameBoard[row][col] === gameBoard[row + 1][col + 1] && gameBoard[row + 1][col + 1] === gameBoard[row + 2][col + 2]);
+            // }
+            // if (isValidIndex(row - 1, col + 1) && isValidIndex(row - 2, col + 2)) {
+            //     return gameBoard[row][col] === gameBoard[row - 1][col + 1] && gameBoard[row - 1][col + 1] === gameBoard[row - 2][col + 2];
+            // }
+
+
         }
     }
 
