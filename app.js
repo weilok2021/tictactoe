@@ -18,17 +18,24 @@ const GameBoard = (function () {
     // A terminal function to tell if the game is ended on this board
     // RETURN which side has won, or tie.
     function getGameStatus() {
+        if (!isEmptySpace(0,0) && (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2])) {
+            console.log(`Player ${gameBoard[0][0]} has won diagonally.`);
+            return gameBoard[0][0];    
+        }
+        else if (!isEmptySpace(2, 0) && (gameBoard[2][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[0][2])) {
+            console.log(`Player ${gameBoard[2][0]} has won diagonally.`);
+            return gameBoard[2][0];
+        }
+
         for (let i = 0; i < gameBoard.length; i++) {
-            // return gameBoard[row][0] === gameBoard[row][1] && gameBoard[row][1] === gameBoard[row][2];
-            // return gameBoard[0][col] === gameBoard[1][col] && gameBoard[1][col] === gameBoard[2][col];
-            // if (isValidIndex(row + 1, col + 1) && isValidIndex(row + 2, col + 2)) {
-            //     return (gameBoard[row][col] === gameBoard[row + 1][col + 1] && gameBoard[row + 1][col + 1] === gameBoard[row + 2][col + 2]);
-            // }
-            // if (isValidIndex(row - 1, col + 1) && isValidIndex(row - 2, col + 2)) {
-            //     return gameBoard[row][col] === gameBoard[row - 1][col + 1] && gameBoard[row - 1][col + 1] === gameBoard[row - 2][col + 2];
-            // }
-
-
+            if (!isEmptySpace(i, 0) && (gameBoard[i][0] === gameBoard[i][1] && gameBoard[i][1] === gameBoard[i][2])) {
+                console.log(`Player ${gameBoard[i][0]} has won horizontally.`);
+                return gameBoard[i][0];
+            }
+            else if (!isEmptySpace(0, i) && (gameBoard[0][i] === gameBoard[1][i] && gameBoard[1][i] === gameBoard[2][i])) {
+                console.log(`Player ${gameBoard[0][i]} has won vertically.`);
+                return gameBoard[0][i];
+            }
         }
     }
 
@@ -86,4 +93,4 @@ const createPlayer = function () {
     return { increment, setSide, getSide };
 }
 
-console.log(GameBoard);
+module.exports = { GameBoard };
