@@ -18,9 +18,9 @@ const GameBoard = (function () {
     // A terminal function to tell if the game is ended on this board
     // RETURN which side has won, or tie.
     function getGameStatus() {
-        if (!isEmptySpace(0,0) && (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2])) {
+        if (!isEmptySpace(0, 0) && (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2])) {
             console.log(`Player ${gameBoard[0][0]} has won diagonally.`);
-            return gameBoard[0][0];    
+            return gameBoard[0][0];
         }
         else if (!isEmptySpace(2, 0) && (gameBoard[2][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[0][2])) {
             console.log(`Player ${gameBoard[2][0]} has won diagonally.`);
@@ -106,12 +106,21 @@ const createPlayer = function () {
     return { increment, setSide, getSide };
 }
 
-const DisplayController = function() {
-    const board = GameBoard.getBoard();
-}
+const ScreenController = (function () {
+    function renderBoard() {
+        const board = GameBoard.getBoard();
+        const tdList = document.querySelectorAll("td");
+        tdList.forEach((td) => {
+            const row = parseInt(td.dataset.row);
+            const col = parseInt(td.dataset.col);
+            td.innerText = board[row][col];
+        });
+    }
+    return { renderBoard };
+})();
 
-const td = document.querySelector("td");
-console.log(td.dataset.col);
-console.log(td.dataset.row);
+
+
+
 
 
